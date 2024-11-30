@@ -3,7 +3,11 @@
     const todos = ref([])
     const newTodo = ref("")
     const CreateTodo = () => {
-        todos.value.push(newTodo.value)
+        todos.value.push({
+            id: todos.value.length + 1,
+            title: newTodo.value,
+            completed: false
+        })
         newTodo.value = ""
     }
     </script>
@@ -17,9 +21,8 @@
     </div>
     <p>Todos:</p>
     <ul>
-        <li v-for="todo in todos" :key="todo" class="todo-item">
-            {{todo}}
-            
+        <li v-for="todo in todos" :key="todo.id" class="todo-item">
+            {{todo.title}}
             </li>
             </ul>
 </template>
@@ -64,7 +67,6 @@ h1{
         justify-content: space-between;
         align-items: center;
         padding: 10px;
-        border-bottom: 1px solid #ccc;
     }
     .todo-item:last-child{
         border-bottom: none;
