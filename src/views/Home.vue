@@ -1,13 +1,27 @@
     <script setup>
+    import { ref } from 'vue';
+    const todos = ref([])
+    const newTodo = ref("")
+    const CreateTodo = () => {
+        todos.value.push(newTodo.value)
+        newTodo.value = ""
+    }
     </script>
 <template>
   <h1>Create Todos</h1>
   <div class="input-wrapper">
       <div class="input-container">
-        <input type="text" placeholder="Enter your task">
-        <button>Create</button>
+        <input type="text" placeholder="Enter your task" v-model="newTodo" />
+        <button @click="CreateTodo" >Create</button>
       </div>
-  </div>
+    </div>
+    <p>Todos:</p>
+    <ul>
+        <li v-for="todo in todos" :key="todo" class="todo-item">
+            {{todo}}
+            
+            </li>
+            </ul>
 </template>
 
 
@@ -44,5 +58,15 @@ h1{
     }
     button:hover{
         background-color: #0069d9;
+    }
+    .todo-item{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+    .todo-item:last-child{
+        border-bottom: none;
     }
 </style>
