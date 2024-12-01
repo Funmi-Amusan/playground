@@ -4,17 +4,22 @@ const props = defineProps({
     todo: {
         type: Object,
         required: true
+    },
+    index: {
+        type: Number,
+        required: true
     }
 })
+defineEmits(['toggle-completed'])
 </script>
 
 <template>  
 <div>
     <li class="todo-item">
-        <input type="checkbox" :checked="todo.completed" />
+        <input type="checkbox" :checked="todo.completed" @input="$emit('toggle-completed', index)" />
         <span>{{todo.title}}</span>
         <div>
-            <Icon icon="mdi-light:home" />
+            <Icon icon="typcn:delete" width="24" height="24"  style="color: red" />
         </div>
     </li>
 </div>

@@ -17,6 +17,10 @@ import { ref } from 'vue';
         })
         newTodo.value = ""
     }
+
+    const toggleTodoComplete = (index) => {
+        todos.value[index].completed = !todos.value[index].completed
+    }
     </script>
 <template>
   <h1>Create Todos</h1>
@@ -27,10 +31,15 @@ import { ref } from 'vue';
       </div>
     </div>
     <p v-show="isInvalid" class="errMsg" >Todo cannot be empty</p>
-    <p>Todos:</p>
-    <ul>
-            <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
-            </ul>
+    <div v-if="todos.length > 0" >
+        <p>Todos:</p>
+        <ul>
+                <TodoItem v-for="(todo, index) in todos" :key="todo.id" :todo="todo" :index="index" @toggle-completed="toggleTodoComplete" />
+                </ul>
+    </div>
+    <div v-else style="display: flex; justify-content: center;">
+        <p>No todos yet</p>
+    </div>
 </template>
 
 
