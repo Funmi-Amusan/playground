@@ -17,7 +17,7 @@ defineEmits(['toggle-completed'])
 <div>
     <li class="todo-item">
         <input type="checkbox" :checked="todo.completed" @input="$emit('toggle-completed', index)" />
-        <span>{{todo.title}}</span>
+        <span :class="{'completed': todo.completed}"  >{{todo.title}}</span>
         <div>
             <Icon icon="typcn:delete" width="24" height="24"  style="color: red" />
         </div>
@@ -31,5 +31,8 @@ defineEmits(['toggle-completed'])
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
+}
+.completed{
+    text-decoration: line-through;
 }
 </style>
