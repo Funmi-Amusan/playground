@@ -1,5 +1,6 @@
     <script setup>
-    import { ref } from 'vue';
+    import TodoItem from '@/components/TodoItem.vue';
+import { ref } from 'vue';
     const todos = ref([])
     const newTodo = ref("")
     const isInvalid = ref(false)
@@ -28,9 +29,7 @@
     <p v-show="isInvalid" class="errMsg" >Todo cannot be empty</p>
     <p>Todos:</p>
     <ul>
-        <li v-for="todo in todos" :key="todo.id" class="todo-item">
-            {{todo.title}}
-            </li>
+            <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
             </ul>
 </template>
 
@@ -68,19 +67,6 @@ h1{
     }
     button:hover{
         background-color: #0069d9;
-    }
-    .todo-item{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-        border-bottom: 1px solid #007bff;
-    }
-    .todo-item:last-child{
-        border-bottom: none;
-    }
-    .todo-item:hover{
-        background-color: #f8f9fa;
     }
     .errMsg{
         color: red;
