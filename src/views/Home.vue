@@ -20,12 +20,12 @@
 <template>
   <h1>Create Todos</h1>
   <div class="input-wrapper">
-      <div class="input-container">
+      <div class="input-container" :class="{'invalidInput': isInvalid}">
         <input type="text" placeholder="Enter your task" v-model="newTodo" />
         <button @click="CreateTodo" >Create</button>
       </div>
     </div>
-    <p v-if="isInvalid" class="errMsg" >Todo cannot be empty</p>
+    <p v-show="isInvalid" class="errMsg" >Todo cannot be empty</p>
     <p>Todos:</p>
     <ul>
         <li v-for="todo in todos" :key="todo.id" class="todo-item">
@@ -86,5 +86,8 @@ h1{
         color: red;
         font-size: 12px;
         margin-top: 5px;
+    }
+    .invalidInput{
+        border: 1px solid red;
     }
 </style>
