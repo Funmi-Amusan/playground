@@ -2,7 +2,13 @@
     import { ref } from 'vue';
     const todos = ref([])
     const newTodo = ref("")
+    const isInvalid = ref(false)
     const CreateTodo = () => {
+        isInvalid.value = false
+        if(newTodo.value.trim() === "") {
+            isInvalid.value = true
+            return
+        }
         todos.value.push({
             id: todos.value.length + 1,
             title: newTodo.value,
@@ -19,6 +25,7 @@
         <button @click="CreateTodo" >Create</button>
       </div>
     </div>
+    <p v-if="isInvalid" class="errMsg" >Todo cannot be empty</p>
     <p>Todos:</p>
     <ul>
         <li v-for="todo in todos" :key="todo.id" class="todo-item">
@@ -67,8 +74,17 @@ h1{
         justify-content: space-between;
         align-items: center;
         padding: 10px;
+        border-bottom: 1px solid #007bff;
     }
     .todo-item:last-child{
         border-bottom: none;
+    }
+    .todo-item:hover{
+        background-color: #f8f9fa;
+    }
+    .errMsg{
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
     }
 </style>
