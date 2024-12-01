@@ -1,4 +1,5 @@
 <script setup>
+import { Icon } from '@iconify/vue';
 const props = defineProps({
     todo: {
         type: Object,
@@ -12,6 +13,9 @@ const props = defineProps({
     <li class="todo-item">
         <input type="checkbox" :checked="todo.completed" />
         <span>{{todo.title}}</span>
+        <div>
+            <Icon icon="mdi-light:home" />
+        </div>
     </li>
 </div>
 </template>
