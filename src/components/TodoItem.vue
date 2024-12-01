@@ -10,7 +10,7 @@ const props = defineProps({
         required: true
     }
 })
-defineEmits(['toggle-completed'])
+defineEmits(['toggle-completed', 'delete-todo'])
 </script>
 
 <template>  
@@ -19,7 +19,7 @@ defineEmits(['toggle-completed'])
         <input type="checkbox" :checked="todo.completed" @input="$emit('toggle-completed', index)" />
         <span :class="{'completed': todo.completed}"  >{{todo.title}}</span>
         <div>
-            <Icon icon="typcn:delete" width="24" height="24"  style="color: red" />
+            <Icon icon="typcn:delete" width="24" height="24"  style="color: red" @click="$emit('delete-todo', todo.id)" />
         </div>
     </li>
 </div>

@@ -21,12 +21,15 @@ import { ref } from 'vue';
     const toggleTodoComplete = (index) => {
         todos.value[index].completed = !todos.value[index].completed
     }
+    const deleteTodo = (id) => {
+        todos.value = todos.value.filter(todo => todo.id !== id)
+    }
     </script>
 <template>
   <h1>Create Todos</h1>
   <div class="input-wrapper">
       <div class="input-container" :class="{'invalidInput': isInvalid}">
-        <input type="text" placeholder="Enter your task" v-model="newTodo" />
+        <input type="text" placeholder="Enter your task" v-model="newTodo" autofocus/>
         <button @click="CreateTodo" >Create</button>
       </div>
     </div>
@@ -34,7 +37,7 @@ import { ref } from 'vue';
     <div v-if="todos.length > 0" >
         <p>Todos:</p>
         <ul>
-                <TodoItem v-for="(todo, index) in todos" :key="todo.id" :todo="todo" :index="index" @toggle-completed="toggleTodoComplete" />
+                <TodoItem v-for="(todo, index) in todos" :key="todo.id" :todo="todo" :index="index" @toggle-completed="toggleTodoComplete" @delete-todo="deleteTodo" />
                 </ul>
     </div>
     <div v-else style="display: flex; justify-content: center;">
