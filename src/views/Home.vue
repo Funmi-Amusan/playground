@@ -1,6 +1,6 @@
     <script setup>
     import TodoItem from '@/components/TodoItem.vue';
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
     const todos = ref([])
     const setTodoListToLocalStorage = () => {
         localStorage.setItem("todolist", JSON.stringify(todos.value))
@@ -9,6 +9,9 @@ import { ref, watch } from 'vue';
         setTodoListToLocalStorage()
     }, {
         deep: true
+    })
+    const todoCompleted = computed(() => {
+        return todos.value.every((todo) => todo.completed)
     })
 const fetchTodos = () => {
     const savedTodos = JSON.parse(localStorage.getItem('todolist'))
@@ -59,6 +62,9 @@ fetchTodos();
     </div>
     <div v-else style="display: flex; justify-content: center;">
         <p>No todos yet</p>
+    </div>
+    <div v-if="todoCompleted && todos.length > 0" style="display: flex; justify-content: center;">
+        <p>All Todos Completed</p>
     </div>
 </template>
 
