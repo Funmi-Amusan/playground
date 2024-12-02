@@ -6,7 +6,6 @@ import { ref, watch } from 'vue';
         localStorage.setItem("todolist", JSON.stringify(todos.value))
     }
     watch(todos, () => {
-        console.log("first")
         setTodoListToLocalStorage()
     }, {
         deep: true
