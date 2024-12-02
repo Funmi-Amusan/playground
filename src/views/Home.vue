@@ -1,7 +1,16 @@
     <script setup>
     import TodoItem from '@/components/TodoItem.vue';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
     const todos = ref([])
+    const setTodoListToLocalStorage = () => {
+        localStorage.setItem("todolist", JSON.stringify(todos.value))
+    }
+    watch(todos, () => {
+        console.log("first")
+        setTodoListToLocalStorage()
+    }, {
+        deep: true
+    })
 const fetchTodos = () => {
     const savedTodos = JSON.parse(localStorage.getItem('todolist'))
     if (savedTodos) {
@@ -9,10 +18,8 @@ const fetchTodos = () => {
     };
 };
 
-fetchTodoList();
-    const setTodoListToLocalStorage = () => {
-        localStorage.setItem("todolist", JSON.stringify(todos.value))
-    }
+fetchTodos();
+   
     const newTodo = ref("")
     const isInvalid = ref(false)
     const CreateTodo = () => {
@@ -27,7 +34,6 @@ fetchTodoList();
             completed: false
         })
         newTodo.value = ""
-        setTodoListToLocalStorage()
     }
 
     const toggleTodoComplete = (index) => {
