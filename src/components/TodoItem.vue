@@ -16,8 +16,18 @@ defineEmits(['toggle-completed', 'delete-todo'])
 <template>  
 <div>
     <li class="todo-item">
-        <span :class="{'completed': todo.completed}"  >{{todo.title}}</span>
-        <input type="checkbox" :checked="todo.completed" @input="$emit('toggle-completed', index)" />
+        <div>
+            <input class="checkbox" type="checkbox" :checked="todo.completed" @input="$emit('toggle-completed', index)" />
+            <span :class="{'completed': todo.completed}"  >{{todo.title}}</span>
+        </div>
+        <div class="action">
+            <div class="action">
+
+                <Icon icon="tabler:clock-hour-4" width="24" height="24"  style="color: #000" />
+                <p>08:00 - 09:00</p>
+            </div>
+                <Icon icon="lineicons:menu-meatballs-1" width="25" height="24"  style="color: grey" />
+        </div>
         <!-- <div>
             <Icon icon="typcn:delete" width="24" height="24"  style="color: red" @click="$emit('delete-todo', todo.id)" />
         </div> -->
@@ -34,5 +44,14 @@ defineEmits(['toggle-completed', 'delete-todo'])
 }
 .completed{
     text-decoration: line-through;
+}
+.checkbox{
+ width: 20px;
+ height: 20px;
+ border-radius: 50%;
+}
+.action{
+    display: flex;
+    flex-direction: row
 }
 </style>
