@@ -26,7 +26,7 @@ defineEmits(['toggle-completed', 'delete-todo'])
                 <Icon icon="tabler:clock-hour-4" width="24" height="24"  style="color: #000" />
                 <p>08:00 - 09:00</p>
             </div>
-                <Icon icon="lineicons:menu-meatballs-1" width="25" height="24"  style="color: grey" />
+                <Icon icon="lineicons:menu-meatballs-1" width="25" height="24"  style="color: grey;" />
         </div>
         <!-- <div>
             <Icon icon="typcn:delete" width="24" height="24"  style="color: red" @click="$emit('delete-todo', todo.id)" />
@@ -41,6 +41,7 @@ defineEmits(['toggle-completed', 'delete-todo'])
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
+    justify-content: space-between;
 }
 .completed{
     text-decoration: line-through;
@@ -52,6 +53,7 @@ defineEmits(['toggle-completed', 'delete-todo'])
 }
 .action{
     display: flex;
-    flex-direction: row
+    flex-direction: row;
+    align-items: center;
 }
 </style>
