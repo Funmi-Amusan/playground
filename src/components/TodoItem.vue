@@ -21,12 +21,15 @@ defineEmits(['toggle-completed', 'delete-todo'])
             <span :class="{'completed': todo.completed}"  >{{todo.title}}</span>
         </div>
         <div class="action">
-            <div class="action">
+            <div class="action grey-bg">
 
-                <Icon icon="tabler:clock-hour-4" width="24" height="24"  style="color: #000" />
+                <Icon icon="tabler:clock-hour-4" width="24" height="24"  style="color: grey" />
                 <p>08:00 - 09:00</p>
             </div>
-                <Icon icon="lineicons:menu-meatballs-1" width="25" height="24"  style="color: grey;" />
+            <div class="grey-bg">
+
+                <Icon icon="majesticons:more-menu-vertical" width="24" height="24"  style="color: grey" />
+            </div>
         </div>
         <!-- <div>
             <Icon icon="typcn:delete" width="24" height="24"  style="color: red" @click="$emit('delete-todo', todo.id)" />
@@ -55,5 +58,11 @@ defineEmits(['toggle-completed', 'delete-todo'])
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+.grey-bg{
+    background-color : gainsboro ;
+    border-radius: 5px;
+    height: 30px;
+    padding-inline: 3px;
 }
 </style>
