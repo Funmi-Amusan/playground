@@ -1,5 +1,7 @@
     <script setup>
-    import TodoItem from '@/components/TodoItem.vue';
+    import axiosClient from '@/axiosClient';
+import TodoItem from '@/components/TodoItem.vue';
+import store from '@/store';
 import { ref, watch, computed } from 'vue';
     const todos = ref([])
     const setTodoListToLocalStorage = () => {
@@ -18,11 +20,15 @@ const fetchTodos = () => {
     if (savedTodos) {
         todos.value = savedTodos
     };
+
 };
+const meals = computed(() => store.state.meals)
+const letters = "ABCDEFGHIJKLMNOPQRSTVXYZ".split('')
 
 fetchTodos();
    
     const newTodo = ref("")
+    const searchString = ref("")
     const isInvalid = ref(false)
     const CreateTodo = () => {
         isInvalid.value = false
@@ -44,9 +50,21 @@ fetchTodos();
     const deleteTodo = (id) => {
         todos.value = todos.value.filter(todo => todo.id !== id)
     }
+
+    const mealData = async () => {
+        const result = await axiosClient.get('/search.php?f=a')
+        console.log("result", result.data.meals)
+    }
+    const searchMeals = async () => {
+        const result = await axiosClient.get(`/search.php?s=${searchString.value}`)
+        console.log("result", result.data.meals)
+    }
+    mealData()
+
+
     </script>
 <template>
-  <h1>Create Todos</h1>
+  <h1 class=" bg-green-500" >Create Todos</h1>
   <div class="input-wrapper">
       <div class="input-container" :class="{'invalidInput': isInvalid}">
         <input type="text" placeholder="Enter your task" v-model="newTodo" autofocus/>
@@ -65,6 +83,24 @@ fetchTodos();
     </div>
     <div v-if="todoCompleted && todos.length > 0" style="display: flex; justify-content: center;">
         <p>All Todos Completed</p>
+    </div>
+
+    <div>
+        <p>{{meals}}</p>
+        <div class="input-wrapper">
+      <div class="input-container" :class="{'invalidInput': isInvalid}">
+        <input type="text" placeholder="Search meals" v-model="newTodo" autofocus/>
+        <button @click="CreateTodo" >Search</button>
+      </div>
+      <router-link 
+  :to="{ name: 'byletter', params: { letter } }" 
+  :key="letter" 
+  v-for="letter of letters" 
+  class="letter"
+>
+  {{ letter }}
+</router-link>
+    </div>
     </div>
 </template>
 
@@ -110,5 +146,12 @@ h1{
     }
     .invalidInput{
         border: 1px solid red;
+    }
+    .letter{
+        padding: 4px;
+        margin: 2px;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        text-decoration: none;
     }
 </style>
