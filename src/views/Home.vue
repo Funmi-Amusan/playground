@@ -56,9 +56,9 @@ fetchTodos();
         console.log("result", result.data.meals)
     }
     const searchMeals = async () => {
-        const result = await axiosClient.get(`/search.php?s=${searchString.value}`)
-        console.log("result", result.data.meals)
+        store.dispatch('searchMeals', searchString.value)
     }
+    const searchedMeals = computed(() => store.state.searchedMeals.meals)
     mealData()
 
 
@@ -86,7 +86,7 @@ fetchTodos();
     </div>
 
     <div>
-        <p>{{meals}}</p>
+        <p>{{searchedMeals}}</p>
         <div class="input-wrapper">
       <div class="input-container" :class="{'invalidInput': isInvalid}">
         <input type="text" placeholder="Search meals" v-model="newTodo" autofocus/>

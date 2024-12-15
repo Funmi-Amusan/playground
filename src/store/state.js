@@ -1,3 +1,7 @@
 export default {
-    meals: ["Salmon"]
+    searchedMeals: {
+        loading: false,
+        meals: []
+    }
 }
+
